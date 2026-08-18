@@ -1,0 +1,950 @@
+@import url("https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap");
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+
+:root {
+  --base-100: #efede8;
+  --base-200: #c12c1a;
+  --base-300: #16130f;
+  --base-400: #8a857b;
+  --line: rgba(22, 19, 15, 0.18);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: var(--base-100);
+  color: var(--base-300);
+  font-family: "PP Neue Montreal", "Zen Kaku Gothic New", sans-serif;
+  overflow-x: hidden;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  text-transform: uppercase;
+  font-family: "PP Neue Montreal", "Shippori Mincho", sans-serif;
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 9vw, 13rem);
+}
+
+h2 {
+  font-size: clamp(2.2rem, 6vw, 7rem);
+}
+
+h3 {
+  font-size: clamp(1.6rem, 3.5vw, 3.5rem);
+}
+
+p {
+  font-family: "PP Neue Montreal", "Zen Kaku Gothic New", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+section {
+  position: relative;
+  width: 100%;
+}
+
+/* =============================================
+   NAV + FULLSCREEN MENU (Navigation Menus/1)
+   ============================================= */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.75rem;
+  max-width: 1650px;
+  margin: 0 auto;
+}
+
+.nav__logo-link {
+  color: #fff;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.nav__btn-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  transition: transform 0.3s ease;
+}
+
+.nav__btn-toggle:hover {
+  transform: scale(1.06);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.menu.active {
+  pointer-events: all;
+}
+
+.menu__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.menu__bg-side {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.menu__bg-side--left { left: 0; }
+.menu__bg-side--right { right: 0; }
+
+.menu__bg-box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.menu__bg-box--left {
+  background: var(--base-100);
+  transform-origin: 100% 50%;
+  transform: rotate(180deg) scale(2);
+}
+
+.menu__bg-box--right {
+  background: var(--base-100);
+  transform-origin: 0% 50%;
+  transform: rotate(-180deg) scale(2);
+}
+
+.menu__content {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.menu__column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2rem;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 3vw, 3.4rem);
+  line-height: 1.1;
+}
+
+.menu__link {
+  color: var(--base-300);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu__link:hover {
+  color: var(--base-200);
+}
+
+.menu a .line {
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+/* =============================================
+   HERO (project 3: pinned clip-path slit reveal)
+   ============================================= */
+.hero {
+  height: 100svh;
+  overflow: hidden;
+}
+
+.hero-fg-content,
+.hero-bg-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+}
+
+.hero-fg-content {
+  background-color: var(--base-300);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  will-change: clip-path, transform;
+  z-index: 2;
+}
+
+.hero-fg-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-fg-header {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  padding: 2rem;
+  color: var(--base-100);
+  text-align: center;
+  mix-blend-mode: difference;
+  text-transform: none;
+}
+
+.hero-fg-header h1 {
+  text-transform: none;
+  line-height: 0.85;
+}
+
+.hero-fg-overlay-dark,
+.hero-fg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.hero-fg-overlay-dark {
+  background-color: var(--base-300);
+}
+
+.hero-fg-overlay {
+  background-color: var(--base-200);
+}
+
+.hero-bg-content {
+  display: flex;
+  background-color: var(--base-100);
+  z-index: 0;
+}
+
+.hero-bg-content-col {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+.hero-bg-content-col:nth-child(2) {
+  justify-content: flex-end;
+}
+
+.hero-bg-content-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 55%;
+  will-change: transform;
+}
+
+.hero-bg-content-copy h3 {
+  color: var(--base-200);
+  font-family: "Shippori Mincho", serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.hero-bg-content-copy p {
+  color: var(--base-300);
+}
+
+.hero-outro-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 1;
+}
+
+.hero-outro-img {
+  flex: 1;
+  height: 100%;
+  will-change: clip-path;
+}
+
+.hero-outro-img:nth-child(1) {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+}
+
+.hero-outro-img:nth-child(2) {
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.hero-outro-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--base-100);
+  text-align: center;
+  width: 60%;
+}
+
+.hero-outro-header .line {
+  position: relative;
+  will-change: transform;
+}
+
+/* =============================================
+   ABOUT
+   ============================================= */
+.about {
+  background-color: var(--base-300);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  padding: 6rem 2rem;
+}
+
+.about h3 {
+  color: var(--base-100);
+  width: 70%;
+  text-align: center;
+}
+
+/* =============================================
+   MARQUEE (Text Animations)
+   ============================================= */
+.marquee {
+  overflow: hidden;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background-color: var(--base-100);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.marquee__group {
+  display: flex;
+  gap: 3rem;
+  padding-right: 3rem;
+}
+
+.marquee__group span {
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  color: var(--base-300);
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* =============================================
+   SHARED SECTION LAYOUT
+   ============================================= */
+.section-head {
+  padding: 2rem 0;
+}
+
+.section-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--base-200);
+  margin-bottom: 1rem;
+}
+
+.title-reveal .line {
+  position: relative;
+  will-change: transform;
+}
+
+/* =============================================
+   LEVELS
+   ============================================= */
+.levels,
+.teachers,
+.voices {
+  padding: 6rem clamp(1.25rem, 4vw, 4rem) 8rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.levels {
+  background-color: var(--base-100);
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.level-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.level-img {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--base-300);
+}
+
+.level-img img {
+  transform: scale(1.25);
+  will-change: transform, clip-path;
+}
+
+.level-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-right: 1rem;
+}
+
+.level-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--base-400);
+}
+
+.level-info h3 {
+  color: var(--base-300);
+}
+
+.level-info p {
+  color: var(--base-300);
+  opacity: 0.8;
+}
+
+/* =============================================
+   TEACHERS
+   ============================================= */
+.teachers {
+  background-color: #fff;
+}
+
+.teachers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.teacher-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.teacher-img {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--base-300);
+}
+
+.teacher-img img {
+  transform: scale(1.25);
+  will-change: transform, clip-path;
+}
+
+.teacher-name {
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.teacher-role {
+  font-size: 0.85rem;
+  color: var(--base-400);
+}
+
+/* =============================================
+   SCHEDULE
+   ============================================= */
+.schedule {
+  background-color: var(--base-300);
+  color: var(--base-100);
+  padding: 6rem clamp(1.25rem, 4vw, 4rem) 8rem;
+}
+
+.schedule .section-label {
+  color: var(--base-200);
+}
+
+.schedule .title-reveal {
+  color: var(--base-100);
+}
+
+.schedule-table {
+  margin-top: 3rem;
+  border-top: 1px solid rgba(239, 237, 232, 0.25);
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 0.6fr;
+  gap: 1rem;
+  padding: 1.6rem 0.5rem;
+  border-bottom: 1px solid rgba(239, 237, 232, 0.25);
+  align-items: baseline;
+}
+
+.schedule-row--head {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--base-400);
+  padding-bottom: 1rem;
+}
+
+.schedule-row span:first-child {
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.schedule-row span:last-child {
+  text-align: right;
+  color: var(--base-200);
+  font-weight: 700;
+}
+
+.schedule-note {
+  margin-top: 2.5rem;
+  color: var(--base-400);
+  max-width: 46rem;
+}
+
+/* =============================================
+   VOICES
+   ============================================= */
+.voices {
+  background-color: var(--base-100);
+}
+
+.voices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.voice-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding: 2.5rem 1.75rem;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.voice-quote {
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  line-height: 1.55;
+  color: var(--base-300);
+}
+
+.voice-author {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--base-400);
+}
+
+/* =============================================
+   CONTACT
+   ============================================= */
+.contact {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 8rem clamp(1.25rem, 4vw, 4rem);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.contact-intro {
+  margin-top: 1.5rem;
+  color: var(--base-300);
+  opacity: 0.8;
+  max-width: 28rem;
+}
+
+.contact-details {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.contact-details p {
+  color: var(--base-300);
+  font-weight: 500;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 1rem 0;
+  font-family: "PP Neue Montreal", "Zen Kaku Gothic New", sans-serif;
+  font-size: 1rem;
+  color: var(--base-300);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-row textarea {
+  resize: vertical;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  border-bottom-color: var(--base-200);
+}
+
+.form-row select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-submit {
+  margin-top: 1rem;
+}
+
+/* Magnetic button (Physics Effects/3) */
+.btn-magnetic {
+  display: inline-block;
+  padding: 1.1rem 2.6rem;
+  background-color: var(--base-200);
+  color: #fff;
+  font-family: "PP Neue Montreal", "Zen Kaku Gothic New", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.btn-magnetic:hover {
+  background-color: var(--base-300);
+}
+
+.form-success {
+  color: var(--base-200);
+  font-weight: 500;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  padding: 2.5rem clamp(1.25rem, 4vw, 4rem);
+  border-top: 1px solid var(--line);
+  background-color: #fff;
+  text-align: center;
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--base-400);
+  letter-spacing: 0.08em;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1000px) {
+  .hero-bg-content-copy {
+    width: 100%;
+  }
+
+  .hero-bg-content-col:nth-child(1) .hero-bg-content-copy {
+    margin-top: -50svh;
+  }
+
+  .hero-bg-content-col:nth-child(2) .hero-bg-content-copy {
+    margin-top: 50svh;
+  }
+
+  .about h3,
+  .hero-outro-header {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .levels-grid,
+  .teachers-grid,
+  .voices-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .schedule-row span:last-child {
+    text-align: left;
+  }
+}
+
+@media (max-width: 550px) {
+  .nav__logo-link {
+    font-size: 1.5rem;
+  }
+
+  .nav__btn-toggle {
+    width: 56px;
+    height: 56px;
+  }
+
+  .menu__bg-side--right {
+    display: none;
+  }
+
+  .menu__bg-side--left {
+    width: 100%;
+  }
+
+  .menu__content {
+    flex-direction: column;
+    padding: 96px 15px;
+    gap: 40px;
+  }
+
+  .menu__column {
+    align-items: flex-start;
+    gap: 1.1rem;
+  }
+
+  .about h3 {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+}
+
+/* =============================================
+   MENU LINK HOVER — stacked duplicate slide-up
+   ============================================= */
+.menu__link {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.menu__link::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--base-200);
+  transform: translateY(110%);
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.menu__link:hover::after {
+  transform: translateY(0);
+}
+
+/* =============================================
+   PAGE HEADER (routed pages)
+   ============================================= */
+.page-header {
+  background-color: var(--base-100);
+  padding: 13rem clamp(1.25rem, 4vw, 4rem) 4rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.page-header__title {
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+}
+
+.page-header__title .char {
+  display: inline-block;
+  will-change: transform;
+}
+
+.page-lede {
+  margin-top: 1.5rem;
+  max-width: 34rem;
+  opacity: 0.85;
+}
+
+/* Scroll typography chars (About statement) */
+.about__statement .char {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* =============================================
+   PAGE TRANSITION — fullscreen curtain
+   ============================================= */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--base-300);
+  color: var(--base-100);
+  will-change: transform;
+}
+
+.page-transition__label {
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(1.8rem, 5vw, 4rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* =============================================
+   PRELOADER
+   ============================================= */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.preloader__panel {
+  position: absolute;
+  inset: 0;
+  background-color: var(--base-300);
+  color: var(--base-100);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  will-change: transform;
+}
+
+.preloader__logo {
+  overflow: hidden;
+}
+
+.preloader__chars {
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  font-weight: 600;
+}
+
+.preloader__chars .char {
+  display: inline-block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+.preloader__tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--base-400);
+}
+
+.preloader__num {
+  position: absolute;
+  bottom: 2rem;
+  right: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--base-200);
+}

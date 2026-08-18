@@ -1,0 +1,152 @@
+/* =============================================
+   GALLERY — grid-to-preview (Grid Animations/4)
+   Ported from shop.scss, tuned to the site scale.
+   ============================================= */
+.gallery {
+  background-color: var(--base-100);
+}
+
+.gallery .products {
+  --page-padding: 1.5rem;
+  position: relative;
+  /* Fixed height (not min-height) so the grid's percentage heights resolve. */
+  height: 100svh;
+  min-height: 620px;
+  width: 100%;
+  overflow: hidden;
+  padding: var(--page-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1650px;
+  margin: 0 auto;
+}
+
+.gallery .products__grid,
+.gallery .products__preview {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  padding: 48px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 5vw;
+  column-gap: 5vw;
+}
+
+.gallery .products__preview {
+  position: absolute;
+  inset: var(--page-padding);
+  height: calc(100% - var(--page-padding) * 2);
+  width: calc(100% - var(--page-padding) * 2);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.gallery .product {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  contain: size;
+  cursor: pointer;
+}
+
+.gallery .product:hover .product__cta {
+  opacity: 1;
+}
+
+.gallery .product__cta {
+  opacity: 0;
+  transition: opacity 0.1s ease-out;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  padding: 10px 0;
+  background-color: rgba(22, 19, 15, 0.85);
+  color: var(--base-100);
+  text-align: center;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.gallery .product__cta p {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.gallery .product-preview {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  grid-column: auto / span 2;
+  grid-row: 1 / span 2;
+  opacity: 0;
+}
+
+.gallery .product-preview__inside {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background: var(--base-100);
+}
+
+.gallery .product-preview__images {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.gallery .product-preview__images > img {
+  grid-column: 1;
+  grid-row: 1;
+  opacity: 0;
+}
+
+.gallery .product-preview__details {
+  z-index: 3;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: var(--base-300);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.gallery .product-preview__details p {
+  font-size: 0.7rem;
+}
+
+@media (max-width: 1000px) {
+  .gallery .products {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .gallery .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    padding: 24px;
+  }
+
+  .gallery .products__preview {
+    display: none;
+  }
+
+  .gallery .product__cta {
+    display: none;
+  }
+}
